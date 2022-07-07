@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pizza;
 use Illuminate\Http\Request;
 use App\Http\Requests\PizzaRequest;
 
-class PizzaController extends Controller
-{
+class PizzaController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        return view("pizza.index");
     }
 
     /**
@@ -22,8 +21,7 @@ class PizzaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         return view("pizza.create");
     }
 
@@ -33,9 +31,19 @@ class PizzaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PizzaRequest $request)
-    {
-        dd($request->all());
+    public function store(PizzaRequest $request) {
+        $path = request()->file('image')->store('public/pizza');
+        Pizza::create([
+            "name" => $request->name,
+            "description" => $request->description,
+            "small_pizza_price" => $request->pizza["small"],
+            "medium_pizza_price" => $request->pizza["medium"],
+            "large_pizza_price" => $request->pizza["large"],
+            "category" => $request->category,
+            "image" => $path
+        ]);
+        session()->flash("message", "Pizza added successfully");
+        return redirect()->route("pizza.index");
     }
 
     /**
@@ -44,8 +52,7 @@ class PizzaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -55,8 +62,7 @@ class PizzaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -67,8 +73,7 @@ class PizzaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -78,8 +83,7 @@ class PizzaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
 }

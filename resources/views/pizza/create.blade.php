@@ -15,21 +15,25 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-9 mt-md-0 mt-5">
                 @if ($errors->count() > 0)
-                    <div class="alert alert-danger">
-                        @foreach ($errors->all() as $error)
-                            <p> {{ $error }} </p>
-                        @endforeach
+                    <div class="card mt-5">
+                        <div class="card-body">
+                            <div class="alert alert-danger">
+                                @foreach ($errors->all() as $error)
+                                    <p> {{ $error }} </p>
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
                 @endif
+            </div>
+            <div class="col-md-9 mt-md-0 mt-5">
                 <div class="card">
                     <div class="card-header">
                         <h2>Pizza</h2>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('pizza.store') }}" method="POST">
+                        <form action="{{ route('pizza.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label class="form-label" for="name">
@@ -67,9 +71,13 @@
                                 <label for="category" class="form-label">Category</label>
                                 <select name="category" id="category" class="form-select">
                                     <option value=""></option>
-                                    <option value="vegetarian">Vegetarian Pizza</option>
-                                    <option value="non-vegetarian">Non-Vegetarian Pizza</option>
-                                    <option value="traditional">Traditional Pizza</option>
+                                    <option value="vegetarian" {{ old('category') === 'vegetarian' ? 'selected' : '' }}>
+                                        Vegetarian Pizza</option>
+                                    <option value="non-vegetarian"
+                                        {{ old('category') === 'non-vegetarian' ? 'selected' : '' }}>Non-Vegetarian Pizza
+                                    </option>
+                                    <option value="traditional" {{ old('category') === 'traditional' ? 'selected' : '' }}>
+                                        Traditional Pizza</option>
                                 </select>
                             </div>
                             <div class="form-group mt-3">

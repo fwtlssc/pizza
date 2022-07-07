@@ -24,7 +24,7 @@ class PizzaRequest extends FormRequest {
             "name" => ["required", "string", "min:3", "max:40"],
             "description" => ["required", "string", "min:3", "max:500"],
             "pizza" => ["required", "array"],
-            "pizza.*" => ["required|integer"],
+            "pizza.*" => ["required", "integer"],
             "category" => ["required"],
             "image" => ["required", "mimes:jpg,jpeg,png"]
         ];
