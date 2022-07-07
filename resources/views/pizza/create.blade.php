@@ -17,6 +17,13 @@
                 </div>
             </div>
             <div class="col-md-9 mt-md-0 mt-5">
+                @if ($errors->count() > 0)
+                    <div class="alert alert-danger">
+                        @foreach ($errors->all() as $error)
+                            <p> {{ $error }} </p>
+                        @endforeach
+                    </div>
+                @endif
                 <div class="card">
                     <div class="card-header">
                         <h2>Pizza</h2>
@@ -44,15 +51,15 @@
                                 <div class="row gy-3">
                                     <div class="col-md-4">
                                         <input type="number" class="form-control" placeholder="small pizza price"
-                                            name="pizza[]" value="{{ old('pizza.0') }}">
+                                            name="pizza[small]" value="{{ old('pizza.small') }}">
                                     </div>
                                     <div class="col-md-4">
                                         <input type="number" class="form-control" placeholder="medium pizza price"
-                                            name="pizza[]" value="{{ old('pizza.1') }}">
+                                            name="pizza[medium]" value="{{ old('pizza.medium') }}">
                                     </div>
                                     <div class="col-md-4">
                                         <input type="number" class="form-control"placeholder="large pizza price"
-                                            name="pizza[]" value="{{ old('pizza.2') }}">
+                                            name="pizza[large]" value="{{ old('pizza.large') }}">
                                     </div>
                                 </div>
                             </div>

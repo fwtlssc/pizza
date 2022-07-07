@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\PizzaRequest;
 
 class PizzaController extends Controller
 {
@@ -32,11 +33,9 @@ class PizzaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PizzaRequest $request)
     {
-        $request->validate([
-            "name" => ["min:210"]
-        ]);
+        dd($request->all());
     }
 
     /**
